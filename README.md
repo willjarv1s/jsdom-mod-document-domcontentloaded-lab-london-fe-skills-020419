@@ -60,11 +60,11 @@ work. You might notice JavaScript giving an error in the DevTools console:
 Uncaught TypeError: Cannot read property 'addEventListener' of null
 ```
 
-Here the browser is telling is it tried to add a listener to an event that
+Here the browser is telling us it tried to add a listener to an event that
 didn't exist, `<body>`.
 
 Edit the code in `script.js` to "wrap" the code inside of an event handler for
-`DOMContentLoaded`. Refresh the page. As you can see, the wrapping code is the
+`DOMContentLoaded`. As you can see, the wrapping code is the
 same handler style you've used for all the other DOM elements. This time,
 though, you're binding to the DOM itself.
 
@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", e => {
 ```
 
 Once the `DOMContentLoaded` event fires, the event happens. Any events we set
-up there will now have the required nodes to "listen on."
+up there will now have the required nodes to "listen on." Refresh the page and 
+verify that the `click` event works.
 
 ## Moving On
 
