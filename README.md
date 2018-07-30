@@ -54,7 +54,7 @@ View the page and confirm the JavaScript code works.
 
 Next, move this code into a new file called `script.js`. Include `script.js` in
 the `<head>` of `index-demo.html`. Reload the page. Your click event won't
-work. You might notice JavaScript giving an error:
+work. You might notice JavaScript giving an error in the DevTools console:
 
 ```text
 Uncaught TypeError: Cannot read property 'addEventListener' of null
