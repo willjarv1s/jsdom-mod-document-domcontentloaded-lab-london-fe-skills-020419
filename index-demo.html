@@ -2,12 +2,13 @@
 <html>
 <head>
   <title> My Site </title>
-  <script src="script.js"></script>
+  <script  type="javascript" src="script.js"></script>
 </head>
 <body>
   <p id="text">Eventing in JavaScript makes things look sharp.</p>
-    <script>
-      document.querySelector("#text").append("this is so freaking cool.")
+    <script type="javascript">
+      document.querySelector("body").addEventListener('click', () =>
+        console.log("Hello Evented JavaScript!"))
     </script>
   </body>
 </html>
