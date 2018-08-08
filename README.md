@@ -26,29 +26,41 @@ We don't ever want to write our JavaScript inside our HTML files.  For the
 same reasons that we want to separate out our CSS from our HTML, we want to
 separate out our JavaScript from our HTML, too.
 
-But let's suppose we write a file that needs to bind to the `<body>` element.
-If our friend decides to use that file and includes it in the `<head>` tag, the
-DOM will not have loaded, our code won't find a `<body>` to bind to, and our
-friend will complain that our code doesn't work.
-
 ![Letting Down Obi-Wan](https://media.giphy.com/media/3ornjJSq2s9xznhO80/giphy.gif)
 
-How can we make sure our code only runs _after_ the DOM has fully "resolved?"
-Why, we listen for the `DOMContentLoaded` event!
+_Don't let Obi-Wan down: separate structure (HTML) and behavior (JavaScript)_
+
+But if we define JavaScript code in a file included in the `<head>` tag, and
+that JavaScript code tries to "bind an event to some HTML element," well, that
+element _doesn't exist yet_.  Remember, the browser's still processing  the
+`<head>`, it's not started loading up the `<body>` yet. As a result, we're
+going (try) to bind an event to..._nothing_.
+
+This can be really confusing and hard to debug. Things will _look_ as they
+ought _on screen_.  But the events will **not** have been bound. You might not
+even **see** the error message if your DevTools Console isn't open.
+
+In this lesson we'll experience this bug, move to a simple solution, and then
+use the solution based on the `DOMContentLoaded` event.
 
 ## Set Up An Event On `DOMContentLoaded`
 
 ### Part I:
 
-If you take a look at `index-demo.html`, you'll notice we have event-handling code
-JavaScript code written at the bottom.
+If you take a look at `index-demo.html`, you'll notice we have event-handling
+code JavaScript code written at the bottom. We know the HTML element we want to
+target, `body`, has to be present because it appears before the `<script>` tag
+in which our JavaScript appears.
+
+Let's see how this works.
 
 Fire up a web server with the `httpserver` command. Open the `index-demo.html`
 (something like: `http://<address>/index-demo.html`), page in the browser and
 open the DevTools console. Clicking anywhere in the body should trigger a
 message to the console.
 
-View the page and confirm the JavaScript code works.
+View the page and confirm the JavaScript code works. Click on the words to make
+sure you're inside the `body` element.
 
 ### Part II:
 
@@ -61,12 +73,16 @@ Uncaught TypeError: Cannot read property 'addEventListener' of null
 ```
 
 Here the browser is telling us it tried to add a listener to an event that
-didn't exist, `<body>`.
+didn't exist, `<body>`. We want to attach our listeners _only after_ we know
+that the `<body>` has fully loaded. We do this by setting up an event listener
+for an event called `DOMContentLoaded`. Inside of that event's handler, we know
+it's safe to bind to HTML elements in the `<body>`.
 
 Edit the code in `script.js` to "wrap" the code inside of an event handler for
-`DOMContentLoaded`. As you can see, the wrapping code is the
-same handler style you've used for all the other DOM elements. This time,
-though, you're binding to the DOM itself.
+`DOMContentLoaded`.
+
+As you can see, the wrapping code is the same handler style you've used for all
+the other DOM elements. This time, though, you're binding to the DOM itself.
 
 ```js
 document.addEventListener("DOMContentLoaded", e => {
@@ -75,9 +91,8 @@ document.addEventListener("DOMContentLoaded", e => {
 })
 ```
 
-Once the `DOMContentLoaded` event fires, the event happens. Any events we set
-up there will now have the required nodes to "listen on." Refresh the page and 
-verify that the `click` event works.
+Go back to your browser and refresh the content. Your listener now works
+(again).
 
 ## Moving On
 
