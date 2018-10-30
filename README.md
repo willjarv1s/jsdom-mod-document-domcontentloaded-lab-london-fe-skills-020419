@@ -96,11 +96,20 @@ Go back to your browser and refresh the content. Your listener now works
 
 ## Moving On
 
-In order to move on run, and satisfy the tests using `learn`. Once you're passing the
-test, enter `learn submit` and move on.
+Let's practice some of the ideas in this lesson on our own. While we've
+been dealing with click events lately, let's not forget that we know how
+to modify the DOM. Tracking click events might even be your path
+to [Internet fame and fortune!][cow]
+
+We've provided you a failing test that you need to fix. Run `learn`
+to see the output from the test. Add code to pass the test.
+Once your code passes the test, enter `learn submit` and move on.
+
 
 ## Conclusion
 
 In this lesson you learned to bind events to DOM events that aren't user
 controlled. This will allow you to operate on the DOM with the guarantee that
 the DOM nodes you need are there.
+
+[cow]: https://www.cowclicker.com/
